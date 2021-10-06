@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           switch(error.status){
 
             case 400:
-              if(error.error.errors){
+              if (error.error.errors) {
                 const modalStateErrors = [];
                 for(const key in error.error.errors){
                   if(error.error.errors[key]){
@@ -30,8 +30,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                   }
                 }
                 throw modalStateErrors.flat();
-              }else{
-                this.toastr.error(error.statusText, error.status);
+              } else if (typeof(error.error === 'object')) {
+                if(error.error.title == 'Bad Request') {
+                  this.toastr.error(error.error.title, error.status);
+                } else {
+                  this.toastr.error(error.error, error.status);
+                }
+              } else {
+                this.toastr.error(error.error, error.status);
               }
               break;
 
