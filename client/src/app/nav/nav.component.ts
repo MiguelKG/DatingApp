@@ -13,23 +13,20 @@ import { MembersService } from '../_services/members.service';
 })
 export class NavComponent implements OnInit {
   model: any = {}
-  currentUser$: Observable<User>;
 
-  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService, private memberService: MembersService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUser$;
   }
 
   login(){
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl("/members");
-      this.memberService.updateCurrentUser();
     })
   }
 
   logout(){
     this.accountService.logout();
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/');
   }
 }

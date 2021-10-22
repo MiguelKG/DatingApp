@@ -6,13 +6,12 @@
     <form #form='ngForm' class='form-inline mb-3' (ngSubmit)='loadMembers()' autocomplete="off">
         <div class="form-group">
             <label>Age from: </label>
-            <input type="number" class='form-control ml-1' style='width: 70px' name='minAge'
+            <input type="number" (change)='minAge()' class='form-control ml-1' style='width: 70px' name='minAge' min='18' max='99'
                 [(ngModel)]="userParams.minAge">
         </div>
-
         <div class="form-group px-2">
             <label>Age to: </label>
-            <input type="number" class='form-control ml-1' style='width: 70px' name='maxAge'
+            <input type="number" (change)='maxAge()' class='form-control ml-1' style='width: 70px' name='maxAge' min='18' max='99'
                 [(ngModel)]="userParams.maxAge">
         </div>
 
